@@ -1,0 +1,6 @@
+POST http://localhost/cats
+Accept: application/json
+
+{
+"kjhsdf": 234
+}

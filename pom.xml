@@ -1,0 +1,309 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="
+					http://maven.apache.org/POM/4.0.0
+					https://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+  <modelVersion>4.0.0</modelVersion>
+
+  <parent>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-parent</artifactId>
+    <version>2.2.4.RELEASE</version>
+  </parent>
+
+  <groupId>ru.cbr.courses</groupId>
+  <artifactId>demo-boot</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+
+  <properties>
+    <java.version>13</java.version>
+    <minimal.maven.version>3.6.1</minimal.maven.version>
+
+    <lombok.version>1.18.12</lombok.version>
+
+    <checker.version>3.1.1</checker.version>
+    <annotations.version>18.0.0</annotations.version>
+    <jcip-annotations.version>1.0</jcip-annotations.version>
+    <spotbugs.version>4.0.0-RC3</spotbugs.version>
+    <error_prone_annotations.version>2.3.4</error_prone_annotations.version>
+
+    <springfox-swagger.version>3.0.0-SNAPSHOT</springfox-swagger.version>
+    <springfox-swagger-ui-rfc6570.version>1.0.0</springfox-swagger-ui-rfc6570.version>
+
+    <!--region plugins-->
+    <maven-enforcer-plugin.version>3.0.0-M3</maven-enforcer-plugin.version>
+    <versions-maven-plugin.version>2.7</versions-maven-plugin.version>
+    <maven-checkstyle-plugin.version>3.1.0</maven-checkstyle-plugin.version>
+    <checkstyle.version>8.29</checkstyle.version>
+    <sonar-maven-plugin.version>2.7.1</sonar-maven-plugin.version>
+    <!--endregion-->
+  </properties>
+
+  <repositories>
+    <repository>
+      <id>jcenter-snapshots</id>
+      <name>jcenter</name>
+      <url>http://oss.jfrog.org/artifactory/oss-snapshot-local/</url>
+    </repository>
+  </repositories>
+
+  <dependencyManagement>
+    <dependencies>
+
+      <dependency>
+        <groupId>org.projectlombok</groupId>
+        <artifactId>lombok</artifactId>
+        <version>${lombok.version}</version>
+        <scope>provided</scope>
+        <optional>true</optional>
+      </dependency>
+
+      <!--region Common Annotations (CheckerFramework, JetBrains, SpotBugs, ErrorProne) -->
+      <dependency>
+        <groupId>org.checkerframework</groupId>
+        <artifactId>checker</artifactId>
+        <version>${checker.version}</version>
+        <scope>provided</scope>
+      </dependency>
+      <dependency>
+        <groupId>org.jetbrains</groupId>
+        <artifactId>annotations</artifactId>
+        <version>${annotations.version}</version>
+        <scope>provided</scope>
+      </dependency>
+      <dependency>
+        <groupId>net.jcip</groupId>
+        <artifactId>jcip-annotations</artifactId>
+        <version>${jcip-annotations.version}</version>
+        <optional>true</optional>
+      </dependency>
+      <dependency>
+        <groupId>com.github.spotbugs</groupId>
+        <artifactId>spotbugs-annotations</artifactId>
+        <version>${spotbugs.version}</version>
+        <optional>true</optional>
+      </dependency>
+      <dependency>
+        <groupId>com.google.errorprone</groupId>
+        <artifactId>error_prone_annotations</artifactId>
+        <version>${error_prone_annotations.version}</version>
+        <scope>provided</scope>
+      </dependency>
+      <!--endregion-->
+
+      <!--region Swagger -->
+      <dependency>
+        <groupId>io.springfox</groupId>
+        <artifactId>springfox-swagger2</artifactId>
+        <version>${springfox-swagger.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>io.springfox</groupId>
+        <artifactId>springfox-swagger-ui</artifactId>
+        <version>${springfox-swagger.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>io.springfox.ui</groupId>
+        <artifactId>springfox-swagger-ui-rfc6570</artifactId>
+        <version>${springfox-swagger-ui-rfc6570.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>io.springfox</groupId>
+        <artifactId>springfox-data-rest</artifactId>
+        <version>${springfox-swagger.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>io.springfox</groupId>
+        <artifactId>springfox-bean-validators</artifactId>
+        <version>${springfox-swagger.version}</version>
+      </dependency>
+      <!--endregion-->
+
+    </dependencies>
+  </dependencyManagement>
+
+  <dependencies>
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-actuator</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-data-jpa</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-data-rest</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-security</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-devtools</artifactId>
+      <scope>runtime</scope>
+      <optional>true</optional>
+    </dependency>
+    <dependency>
+      <groupId>com.h2database</groupId>
+      <artifactId>h2</artifactId>
+      <scope>runtime</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.projectlombok</groupId>
+      <artifactId>lombok</artifactId>
+    </dependency>
+
+    <!--region Common Annotations (CheckerFramework, JetBrains, SpotBugs, ErrorProne) -->
+    <dependency>
+      <groupId>org.checkerframework</groupId>
+      <artifactId>checker</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.jetbrains</groupId>
+      <artifactId>annotations</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>net.jcip</groupId>
+      <artifactId>jcip-annotations</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>com.github.spotbugs</groupId>
+      <artifactId>spotbugs-annotations</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>com.google.errorprone</groupId>
+      <artifactId>error_prone_annotations</artifactId>
+    </dependency>
+    <!--endregion-->
+    <!--region SpringFox Swagger -->
+    <dependency>
+      <groupId>io.springfox</groupId>
+      <artifactId>springfox-swagger2</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>io.springfox.ui</groupId>
+      <artifactId>springfox-swagger-ui-rfc6570</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>io.springfox</groupId>
+      <artifactId>springfox-data-rest</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>io.springfox</groupId>
+      <artifactId>springfox-bean-validators</artifactId>
+    </dependency>
+    <!--endregion-->
+
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-test</artifactId>
+      <scope>test</scope>
+      <exclusions>
+        <exclusion>
+          <groupId>org.junit.vintage</groupId>
+          <artifactId>junit-vintage-engine</artifactId>
+        </exclusion>
+      </exclusions>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework.security</groupId>
+      <artifactId>spring-security-test</artifactId>
+      <scope>test</scope>
+    </dependency>
+
+  </dependencies>
+
+  <build>
+
+		<defaultGoal>spring-boot:run</defaultGoal>
+
+    <pluginManagement>
+      <plugins>
+
+        <plugin>
+          <artifactId>maven-enforcer-plugin</artifactId>
+          <version>${maven-enforcer-plugin.version}</version>
+          <executions>
+            <execution>
+              <id>enforce-maven</id>
+              <goals>
+                <goal>enforce</goal>
+              </goals>
+              <configuration>
+                <rules>
+                  <requireMavenVersion>
+                    <version>${minimal.maven.version}</version>
+                  </requireMavenVersion>
+                </rules>
+              </configuration>
+            </execution>
+          </executions>
+        </plugin>
+        <plugin>
+          <groupId>org.codehaus.mojo</groupId>
+          <artifactId>versions-maven-plugin</artifactId>
+          <version>${versions-maven-plugin.version}</version>
+          <configuration>
+            <generateBackupPoms>false</generateBackupPoms>
+            <rulesUri>file://${user.dir}/ruleset.xml</rulesUri>
+          </configuration>
+        </plugin>
+        <plugin>
+          <artifactId>maven-checkstyle-plugin</artifactId>
+          <version>${maven-checkstyle-plugin.version}</version>
+          <configuration><!--http://maven.apache.org/plugins/maven-checkstyle-plugin/usage.html-->
+            <configLocation>google_checks.xml</configLocation>
+          </configuration>
+          <executions>
+            <execution>
+              <goals>
+                <goal>check</goal>
+              </goals>
+            </execution>
+          </executions>
+          <dependencies>
+            <dependency>
+              <groupId>com.puppycrawl.tools</groupId>
+              <artifactId>checkstyle</artifactId>
+              <version>${checkstyle.version}</version>
+            </dependency>
+          </dependencies>
+        </plugin>
+        <plugin>
+          <groupId>org.codehaus.mojo</groupId>
+          <artifactId>sonar-maven-plugin</artifactId>
+          <version>${sonar-maven-plugin.version}</version>
+        </plugin>
+
+      </plugins>
+    </pluginManagement>
+
+    <plugins>
+      <plugin>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-maven-plugin</artifactId>
+      </plugin>
+
+      <plugin>
+        <artifactId>maven-enforcer-plugin</artifactId>
+      </plugin>
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>versions-maven-plugin</artifactId>
+      </plugin>
+      <plugin>
+        <artifactId>maven-checkstyle-plugin</artifactId>
+      </plugin>
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>sonar-maven-plugin</artifactId>
+      </plugin>
+
+    </plugins>
+  </build>
+
+</project>
